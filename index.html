@@ -44,72 +44,65 @@
 <body>
 
     <header>
-        <nav style="display: flex; gap: 20px; font-size: 0.9rem; color: #e5e5e5; margin-bottom: 30px;">
-            <a href="https://yordang15.github.io/MEDYG/" style="text-decoration: none;">
-    <span style="color: #E50914; font-weight: bold; font-size: 1.5rem;">MEDYG</span>
-</a>
-        </nav>
-        <h1>Repaso de Especialidades</h1>
-    </header>
-
-    <section class="video-grid">
-        <!-- Sección: Fisiología Cardiovascular -->
-<h2 style="color: white; margin-top: 30px;">Fisiología Cardiovascular</h2>
-<section class="video-grid">
-    <!-- Video 1 -->
-    <div class="video-card" onclick="openVideo('G43CsQI91ec')">
-        <img src="https://img.youtube.com/vi/G43CsQI91ec/maxresdefault.jpg" alt="Fisiología Cardíaca">
-        <p style="font-size: 0.8rem; margin-top: 5px;">🫀 Fisiología Cardíaca: Potencial de Acción</p>
-    </div>
-    <!-- Agrega más cards de Cardio aquí -->
-</section>
-
-<!-- Sección: Fisiología Renal -->
-<h2 style="color: white; margin-top: 30px;">Fisiología Renal</h2>
-<section class="video-grid">
-    <div class="video-card" onclick="openVideo('ID_VIDEO_RENAL')">
-        <img src="https://img.youtube.com/vi/ID_VIDEO_RENAL/maxresdefault.jpg" alt="Fisiología Renal">
-        <p style="font-size: 0.8rem; margin-top: 5px;">🧬 Filtración Glomerular</p>
-    </div>
-</section>
-
-<!-- Sección: Fisiología Homeostasis -->
-<h2 style="color: white; margin-top: 30px;">Fisiología Homeostasis</h2>
-<section class="video-grid">
-    <div class="video-card" onclick="openVideo('ID_VIDEO_HOMEOSTASIS')">
-        <img src="https://img.youtube.com/vi/ID_VIDEO_HOMEOSTASIS/maxresdefault.jpg" alt="Homeostasis">
-        <p style="font-size: 0.8rem; margin-top: 5px;">⚖️ Mecanismos de Retroalimentación</p>
-    </div>
-</section>
-        <!-- Ejemplo de Card -->
-        <div class="video-card" onclick="openVideo('ID_DEL_VIDEO')">
-            <img src="https://img.youtube.com/vi/ID_DEL_VIDEO/maxresdefault.jpg" alt="Miniatura">
-            <p style="font-size: 0.8rem; margin-top: 5px;">🧬 Título del Video Médico</p>
+      <main>
+        <div class="category-section">
+            <h2 class="category-title">🫀 Fisiología Cardiovascular</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('G43CsQI91ec')">
+                    <img src="https://img.youtube.com/vi/G43CsQI91ec/maxresdefault.jpg" alt="Cardio 1">
+                    <p>Potencial de Acción Cardíaco</p>
+                </div>
+                </div>
         </div>
-        <div class="video-card" onclick="openVideo('G43CsQI9lec')">
-    <img src="https://img.youtube.com/vi/G43CsQI9lec/maxresdefault.jpg" alt="Fisiología Cardíaca">
-    <p style="font-size: 0.8rem; margin-top: 5px;">🫀 Fisiología Cardíaca: Potencial de Acción</p>
-</div>
-        <!-- Repetir para más videos -->
-    </section>
 
-    <!-- El "Reproductor" de MEDYG -->
-    <div id="videoModal" class="modal" onclick="closeVideo()">
-        <div id="playerContainer"></div>
+        <div class="category-section">
+            <h2 class="category-title">🧬 Fisiología Renal</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('ID_VIDEO_RENAL')">
+                    <img src="https://img.youtube.com/vi/ID_VIDEO_RENAL/maxresdefault.jpg" alt="Renal 1">
+                    <p>Mecanismo de Filtración Glomerular</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">⚖️ Fisiología Homeostasis</h2>
+            <div class="video-grid">
+                <div class="video-card" onclick="openVideo('ID_VIDEO_HOMEOSTASIS')">
+                    <img src="https://img.youtube.com/vi/ID_VIDEO_HOMEOSTASIS/maxresdefault.jpg" alt="Homeostasis 1">
+                    <p>Sistemas de Retroalimentación</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeVideo()">&times;</span>
+            <iframe id="videoPlayer" width="100%" height="400px" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
     <script>
-        function openVideo(id) {
+        function openVideo(videoId) {
             const modal = document.getElementById('videoModal');
-            const container = document.getElementById('playerContainer');
-            container.innerHTML = `<iframe width="854" height="480" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
-            modal.style.display = 'flex';
+            const player = document.getElementById('videoPlayer');
+            player.src = "https://www.youtube.com/embed/" + videoId;
+            modal.style.display = "flex";
         }
 
         function closeVideo() {
             const modal = document.getElementById('videoModal');
-            document.getElementById('playerContainer').innerHTML = '';
-            modal.style.display = 'none';
+            const player = document.getElementById('videoPlayer');
+            player.src = "";
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeVideo();
+            }
         }
     </script>
 </body>
