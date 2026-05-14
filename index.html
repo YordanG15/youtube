@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <style>
+        body { background-color: #141414; color: white; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 20px; }
+        h1 { font-size: 2rem; margin-bottom: 10px; }
+        
+        /* Contenedor de la cuadrícula inspirado en image_cbea26.png */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px 0;
+        }
+
+        /* Estilo de las miniaturas */
+        .video-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .video-card img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        /* Modal para ver el video sin salir de la página */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center; align-items: center;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav style="display: flex; gap: 20px; font-size: 0.9rem; color: #e5e5e5; margin-bottom: 30px;">
+            <span style="color: #E50914; font-weight: bold; font-size: 1.5rem;">MEDYG</span>
+            <span>Inicio</span>
+            <span>Bioquímica</span>
+            <span>Inmunología</span>
+            <span>Mi lista</span>
+        </nav>
+        <h1>Repaso de Especialidades</h1>
+    </header>
+
+    <section class="video-grid">
+        <!-- Ejemplo de Card -->
+        <div class="video-card" onclick="openVideo('ID_DEL_VIDEO')">
+            <img src="https://img.youtube.com/vi/ID_DEL_VIDEO/maxresdefault.jpg" alt="Miniatura">
+            <p style="font-size: 0.8rem; margin-top: 5px;">🧬 Título del Video Médico</p>
+        </div>
+        <!-- Repetir para más videos -->
+    </section>
+
+    <!-- El "Reproductor" de MEDYG -->
+    <div id="videoModal" class="modal" onclick="closeVideo()">
+        <div id="playerContainer"></div>
+    </div>
+
+    <script>
+        function openVideo(id) {
+            const modal = document.getElementById('videoModal');
+            const container = document.getElementById('playerContainer');
+            container.innerHTML = `<iframe width="854" height="480" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+            modal.style.display = 'flex';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            document.getElementById('playerContainer').innerHTML = '';
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
